@@ -1,0 +1,136 @@
+[gd_scene load_steps=11 format=3 uid="uid://53ch788ojqop"]
+
+[ext_resource type="Script" uid="uid://dllbf16k6f3" path="res://ui/menu_kuis/menu.gd" id="1_dvpjr"]
+[ext_resource type="Texture2D" uid="uid://d2fam1e2fdjrl" path="res://assets/Backgound/layerUtama.jpg" id="2_dvpjr"]
+[ext_resource type="Texture2D" uid="uid://bw573q761qiju" path="res://assets/Backgound/layerMenu.png" id="3_qes8a"]
+[ext_resource type="Texture2D" uid="uid://djxw6p525r8db" path="res://assets/Other/papan_materi.png" id="4_l1q35"]
+[ext_resource type="Texture2D" uid="uid://d1q0sq3yierm5" path="res://assets/Button/ui/variabel.png" id="5_f7oap"]
+[ext_resource type="Texture2D" uid="uid://cga1ulo14bhl7" path="res://assets/Button/ui/if_else.png" id="6_1nsht"]
+[ext_resource type="Texture2D" uid="uid://b6srxj3wdyj27" path="res://assets/Button/ui/looping.png" id="7_o0sq0"]
+[ext_resource type="Texture2D" uid="uid://7x2uq5qd1y87" path="res://assets/Button/ui/input_output.png" id="8_d5lrb"]
+[ext_resource type="Texture2D" uid="uid://bg6fphjqd7upf" path="res://assets/Button/ui/kembali.png" id="9_l1q35"]
+[ext_resource type="Texture2D" uid="uid://xlhpy107jf7n" path="res://assets/Other/mobil.png" id="10_f7oap"]
+
+[node name="layerMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dvpjr")
+
+[node name="background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 955.0
+offset_bottom = 525.0
+texture = ExtResource("2_dvpjr")
+expand_mode = 1
+
+[node name="papanMenu" type="TextureRect" parent="background"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -200.0
+offset_right = 120.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(120, 200)
+texture = ExtResource("3_qes8a")
+expand_mode = 1
+
+[node name="papanMateri" type="TextureRect" parent="background/papanMenu"]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 10.0
+offset_right = 185.0
+offset_bottom = 80.0
+pivot_offset = Vector2(62.5, 35)
+texture = ExtResource("4_l1q35")
+expand_mode = 1
+
+[node name="variabel" type="Button" parent="background/papanMenu"]
+layout_mode = 0
+offset_left = 35.5
+offset_top = 100.5
+offset_right = 204.5
+offset_bottom = 143.5
+pivot_offset = Vector2(84.5, 21.5)
+focus_mode = 0
+icon = ExtResource("5_f7oap")
+flat = true
+
+[node name="ifelse" type="Button" parent="background/papanMenu"]
+layout_mode = 0
+offset_left = 35.5
+offset_top = 160.5
+offset_right = 204.5
+offset_bottom = 203.5
+pivot_offset = Vector2(84.5, 21.5)
+focus_mode = 0
+icon = ExtResource("6_1nsht")
+flat = true
+
+[node name="looping" type="Button" parent="background/papanMenu"]
+layout_mode = 0
+offset_left = 35.5
+offset_top = 220.5
+offset_right = 204.5
+offset_bottom = 263.5
+pivot_offset = Vector2(84.5, 21.5)
+focus_mode = 0
+icon = ExtResource("7_o0sq0")
+flat = true
+
+[node name="inout" type="Button" parent="background/papanMenu"]
+layout_mode = 0
+offset_left = 35.5
+offset_top = 280.5
+offset_right = 204.5
+offset_bottom = 323.5
+pivot_offset = Vector2(84.5, 21.5)
+focus_mode = 0
+icon = ExtResource("8_d5lrb")
+flat = true
+
+[node name="kembali" type="Button" parent="background/papanMenu"]
+layout_mode = 0
+offset_left = 40.5
+offset_top = 358.5
+offset_right = 198.5
+offset_bottom = 396.5
+pivot_offset = Vector2(79, 19)
+focus_mode = 0
+icon = ExtResource("9_l1q35")
+flat = true
+
+[node name="mobil" type="TextureRect" parent="background"]
+layout_mode = 0
+offset_left = 860.0
+offset_top = 465.0
+offset_right = 985.0
+offset_bottom = 520.0
+texture = ExtResource("10_f7oap")
+expand_mode = 1
+
+[node name="mobil2" type="TextureRect" parent="background"]
+layout_mode = 0
+offset_top = 465.0
+offset_right = 125.0
+offset_bottom = 520.0
+texture = ExtResource("10_f7oap")
+expand_mode = 1
+
+[node name="mobil3" type="TextureRect" parent="background"]
+layout_mode = 0
+offset_left = 430.0
+offset_top = 465.0
+offset_right = 555.0
+offset_bottom = 520.0
+texture = ExtResource("10_f7oap")
+expand_mode = 1

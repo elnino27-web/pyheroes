@@ -1,38 +1,25 @@
 extends CharacterBody2D
 
-const KECEPATAN = 130
-var state: State
-var states = {}
-var vel = Vector2.ZERO
-var arah_terakhir = Vector2.RIGHT
 
-func _ready():
-	# load states
-	states["idle"] = load("res://states/IdleState.gd").new()
-	states["jalan"] = load("res://states/JalanState.gd").new()
-	states["serang"] = load("res://states/SerangState.gd").new()
+const SPEED = 100.0
+const JUMP_VELOCITY = -400.0
 
-	# kasih referensi player ke setiap state
-	for s in states.values():
-		s.player = self
 
-	change_state("idle")
-	
-func get_animasi():
-	return $AnimatedSprite2D
-	
-func change_state(new_state):
-	if state:
-		state.exit()
-	state = states[new_state]
-	state.enter()
+func _physics_process(delta: float) -> void:
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * delta
 
-func _input(event):
-	state.handle_input(event)
+	# Handle jump.
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
 
-func _process(delta):
-	state.update(delta)
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var direction := Input.get_axis("ui_left", "ui_right")
+	if direction:
+		velocity.x = direction * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
 
-func _physics_process(delta):
-	state.physics_update(delta)
 	move_and_slide()

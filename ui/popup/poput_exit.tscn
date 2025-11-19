@@ -1,0 +1,85 @@
+[gd_scene load_steps=7 format=3 uid="uid://38qllowblk84"]
+
+[ext_resource type="Script" uid="uid://cwv2gkpxfkemt" path="res://ui/popup/poput_exit.gd" id="1_3isqo"]
+[ext_resource type="Texture2D" uid="uid://d2fam1e2fdjrl" path="res://assets/Backgound/layerUtama.jpg" id="2_sefna"]
+[ext_resource type="Texture2D" uid="uid://042ee130ru7g" path="res://assets/Other/papan_confirm.png" id="3_o67ix"]
+[ext_resource type="Texture2D" uid="uid://dvfmyeilkjojx" path="res://assets/Button/ui/keluar_confirm.png" id="4_6utxg"]
+[ext_resource type="Texture2D" uid="uid://ch3nd2w7fjki8" path="res://assets/Button/ui/batal_confirm.png" id="5_ip70e"]
+[ext_resource type="Texture2D" uid="uid://xlhpy107jf7n" path="res://assets/Other/mobil.png" id="6_b8ved"]
+
+[node name="PoputExit" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_3isqo")
+
+[node name="background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 955.0
+offset_bottom = 525.0
+texture = ExtResource("2_sefna")
+expand_mode = 1
+
+[node name="papanConfirm" type="TextureRect" parent="background"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -214.0
+offset_top = -112.5
+offset_right = 214.0
+offset_bottom = 112.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(214, 112.5)
+texture = ExtResource("3_o67ix")
+expand_mode = 1
+
+[node name="keluar" type="Button" parent="background/papanConfirm"]
+layout_mode = 0
+offset_left = 235.0
+offset_top = 165.0
+offset_right = 393.0
+offset_bottom = 203.0
+pivot_offset = Vector2(79, 19)
+focus_mode = 0
+icon = ExtResource("4_6utxg")
+flat = true
+
+[node name="batal" type="Button" parent="background/papanConfirm"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 165.0
+offset_right = 193.0
+offset_bottom = 203.0
+pivot_offset = Vector2(79, 19)
+focus_mode = 0
+icon = ExtResource("5_ip70e")
+flat = true
+
+[node name="mobil" type="TextureRect" parent="background"]
+layout_mode = 0
+offset_left = 860.0
+offset_top = 465.0
+offset_right = 985.0
+offset_bottom = 520.0
+texture = ExtResource("6_b8ved")
+expand_mode = 1
+
+[node name="mobil2" type="TextureRect" parent="background"]
+layout_mode = 0
+offset_top = 465.0
+offset_right = 125.0
+offset_bottom = 520.0
+texture = ExtResource("6_b8ved")
+expand_mode = 1
+
+[node name="mobil3" type="TextureRect" parent="background"]
+layout_mode = 0
+offset_left = 430.0
+offset_top = 465.0
+offset_right = 555.0
+offset_bottom = 520.0
+texture = ExtResource("6_b8ved")
+expand_mode = 1

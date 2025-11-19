@@ -1,0 +1,94 @@
+[gd_scene load_steps=8 format=3 uid="uid://x85hu06dedti"]
+
+[ext_resource type="Script" uid="uid://cfmduevhylhnk" path="res://ui/index/index.gd" id="1_ul3l6"]
+[ext_resource type="Texture2D" uid="uid://d2fam1e2fdjrl" path="res://assets/Backgound/layerUtama.jpg" id="2_ul3l6"]
+[ext_resource type="Texture2D" uid="uid://drtlhgsowu7fl" path="res://assets/Other/logo.png" id="3_8w3ip"]
+[ext_resource type="Texture2D" uid="uid://dh2xxjqgglw1j" path="res://assets/Button/ui/bermain.png" id="3_anmh5"]
+[ext_resource type="Texture2D" uid="uid://buw74757sr8h2" path="res://assets/Button/ui/petunjuk.png" id="4_lgei5"]
+[ext_resource type="Texture2D" uid="uid://c7rcccp17obtn" path="res://assets/Button/ui/keluar.png" id="5_dptk6"]
+[ext_resource type="Texture2D" uid="uid://xlhpy107jf7n" path="res://assets/Other/mobil.png" id="6_dptk6"]
+
+[node name="layerUtama" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ul3l6")
+
+[node name="background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 955.0
+offset_bottom = 525.0
+texture = ExtResource("2_ul3l6")
+expand_mode = 1
+
+[node name="logo" type="TextureRect" parent="background"]
+layout_mode = 0
+offset_left = 231.0
+offset_top = 45.0
+offset_right = 731.0
+offset_bottom = 225.0
+pivot_offset = Vector2(250, 90)
+texture = ExtResource("3_8w3ip")
+expand_mode = 1
+
+[node name="mobil" type="TextureRect" parent="background"]
+layout_mode = 0
+offset_left = 860.0
+offset_top = 465.0
+offset_right = 985.0
+offset_bottom = 520.0
+texture = ExtResource("6_dptk6")
+expand_mode = 1
+
+[node name="mobil2" type="TextureRect" parent="background"]
+layout_mode = 0
+offset_top = 465.0
+offset_right = 125.0
+offset_bottom = 520.0
+texture = ExtResource("6_dptk6")
+expand_mode = 1
+
+[node name="mobil3" type="TextureRect" parent="background"]
+layout_mode = 0
+offset_left = 430.0
+offset_top = 465.0
+offset_right = 555.0
+offset_bottom = 520.0
+texture = ExtResource("6_dptk6")
+expand_mode = 1
+
+[node name="bermain" type="Button" parent="background"]
+layout_mode = 0
+offset_left = 275.0
+offset_top = 270.0
+offset_right = 683.0
+offset_bottom = 364.0
+pivot_offset = Vector2(204, 47)
+focus_mode = 0
+icon = ExtResource("3_anmh5")
+flat = true
+
+[node name="petunjuk" type="Button" parent="background"]
+layout_mode = 0
+offset_left = 185.0
+offset_top = 380.0
+offset_right = 443.0
+offset_bottom = 442.0
+pivot_offset = Vector2(129, 31)
+focus_mode = 0
+icon = ExtResource("4_lgei5")
+flat = true
+
+[node name="keluar" type="Button" parent="background"]
+layout_mode = 0
+offset_left = 510.0
+offset_top = 380.0
+offset_right = 768.0
+offset_bottom = 442.0
+pivot_offset = Vector2(129, 31)
+focus_mode = 0
+icon = ExtResource("5_dptk6")
+flat = true
