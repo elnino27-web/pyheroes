@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bt8pkckl18b1h"]
+[gd_scene load_steps=30 format=3 uid="uid://bt8pkckl18b1h"]
 
 [ext_resource type="Texture2D" uid="uid://bd5kbqqbou42i" path="res://assets/Backgound/level2_scene.png" id="1_a27ry"]
 [ext_resource type="Script" uid="uid://d2auru13txvi5" path="res://maps/looping/logic/level2.gd" id="1_so608"]
@@ -7,6 +7,23 @@
 [ext_resource type="Texture2D" uid="uid://c87v032h6thhx" path="res://assets/Button/maps/petunjuk_map.png" id="4_gt6ek"]
 [ext_resource type="Script" uid="uid://3b0vplg4f7u1" path="res://maps/karakter/karakter.gd" id="6_gt6ek"]
 [ext_resource type="Texture2D" uid="uid://dho2ihxnledh6" path="res://assets/player.png" id="7_pd6wj"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gt6ek"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pd6wj"]
+size = Vector2(17, 511)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pobis"]
+size = Vector2(693, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2c72s"]
+size = Vector2(24, 363)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xtkp"]
+size = Vector2(552, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e045x"]
+size = Vector2(53, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_elquc"]
 atlas = ExtResource("7_pd6wj")
@@ -64,7 +81,7 @@ region = Rect2(948, 688, 79, 86)
 atlas = ExtResource("7_pd6wj")
 region = Rect2(869, 688, 79, 86)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_pobis"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_gquc0"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -179,9 +196,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2c72s"]
-radius = 7.3333435
-height = 42.666687
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_737uf"]
+radius = 6.0
+height = 12.0
 
 [node name="Level2" type="Node2D"]
 script = ExtResource("1_so608")
@@ -220,6 +237,41 @@ focus_mode = 0
 icon = ExtResource("4_gt6ek")
 flat = true
 
+[node name="StaticBody2D" type="StaticBody2D" parent="map"]
+physics_material_override = SubResource("PhysicsMaterial_gt6ek")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="map/StaticBody2D"]
+position = Vector2(220, -1.5)
+shape = SubResource("RectangleShape2D_pd6wj")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="map/StaticBody2D"]
+position = Vector2(-468, 1)
+shape = SubResource("RectangleShape2D_pd6wj")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="map/StaticBody2D"]
+position = Vector2(-120.5, -185)
+shape = SubResource("RectangleShape2D_pobis")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="map/StaticBody2D"]
+position = Vector2(-120.5, 255)
+shape = SubResource("RectangleShape2D_pobis")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="map/StaticBody2D"]
+position = Vector2(139, 3.5)
+shape = SubResource("RectangleShape2D_2c72s")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="map/StaticBody2D"]
+position = Vector2(-392, 3.5)
+shape = SubResource("RectangleShape2D_2c72s")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="map/StaticBody2D"]
+position = Vector2(-127, 195)
+shape = SubResource("RectangleShape2D_0xtkp")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="map/StaticBody2D"]
+position = Vector2(-431.5, -92)
+shape = SubResource("RectangleShape2D_e045x")
+
 [node name="karakter" type="CharacterBody2D" parent="map"]
 position = Vector2(-707, 31)
 scale = Vector2(1.5, 1.5)
@@ -230,12 +282,12 @@ z_as_relative = false
 texture_filter = 1
 position = Vector2(169.33333, -109.333336)
 scale = Vector2(0.5388127, 0.72093016)
-sprite_frames = SubResource("SpriteFrames_pobis")
+sprite_frames = SubResource("SpriteFrames_gquc0")
 animation = &"diam"
 autoplay = "diam"
 speed_scale = 1.75
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="map/karakter"]
-position = Vector2(183.33333, -71.33333)
-shape = SubResource("CapsuleShape2D_2c72s")
+position = Vector2(183.33333, -56.66666)
+shape = SubResource("CapsuleShape2D_737uf")

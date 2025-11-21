@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dgr76ot25sq06"]
+[gd_scene load_steps=34 format=3 uid="uid://dgr76ot25sq06"]
 
 [ext_resource type="Script" uid="uid://bwymcfdr5jmhx" path="res://maps/inOut/logic/level5.gd" id="1_a283y"]
 [ext_resource type="Texture2D" uid="uid://4fcf7v0l20o8" path="res://assets/Backgound/level5_scene.png" id="2_wh0k8"]
@@ -7,6 +7,35 @@
 [ext_resource type="Texture2D" uid="uid://c87v032h6thhx" path="res://assets/Button/maps/petunjuk_map.png" id="5_6hgtc"]
 [ext_resource type="Script" uid="uid://3b0vplg4f7u1" path="res://maps/karakter/karakter.gd" id="6_f6xgv"]
 [ext_resource type="Texture2D" uid="uid://dho2ihxnledh6" path="res://assets/player.png" id="7_fhs3c"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f6xgv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fhs3c"]
+size = Vector2(17, 511)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6hgtc"]
+size = Vector2(693, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3rm10"]
+size = Vector2(110, 170)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ke2jh"]
+size = Vector2(50, 300)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2hce3"]
+size = Vector2(177, 258)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k543t"]
+size = Vector2(128, 207)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0tfix"]
+size = Vector2(426.5, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t68yo"]
+size = Vector2(47, 175)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_448op"]
+size = Vector2(171, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_elquc"]
 atlas = ExtResource("7_fhs3c")
@@ -64,7 +93,7 @@ region = Rect2(948, 688, 79, 86)
 atlas = ExtResource("7_fhs3c")
 region = Rect2(869, 688, 79, 86)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_6hgtc"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_ixvhl"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -179,9 +208,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3rm10"]
-radius = 7.3333435
-height = 42.666687
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6au2l"]
+radius = 6.000002
+height = 12.000004
 
 [node name="Level5" type="Node2D"]
 script = ExtResource("1_a283y")
@@ -220,6 +249,53 @@ focus_mode = 0
 icon = ExtResource("5_6hgtc")
 flat = true
 
+[node name="StaticBody2D" type="StaticBody2D" parent="map"]
+physics_material_override = SubResource("PhysicsMaterial_f6xgv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="map/StaticBody2D"]
+position = Vector2(220, -1.5)
+shape = SubResource("RectangleShape2D_fhs3c")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="map/StaticBody2D"]
+position = Vector2(-468, 1)
+shape = SubResource("RectangleShape2D_fhs3c")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="map/StaticBody2D"]
+position = Vector2(-120.5, -185)
+shape = SubResource("RectangleShape2D_6hgtc")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="map/StaticBody2D"]
+position = Vector2(-120.5, 255)
+shape = SubResource("RectangleShape2D_6hgtc")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="map/StaticBody2D"]
+position = Vector2(156, 164)
+shape = SubResource("RectangleShape2D_3rm10")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="map/StaticBody2D"]
+position = Vector2(-4, 54)
+shape = SubResource("RectangleShape2D_ke2jh")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="map/StaticBody2D"]
+position = Vector2(-196.5, 121)
+shape = SubResource("RectangleShape2D_2hce3")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="map/StaticBody2D"]
+position = Vector2(85, -75.5)
+shape = SubResource("RectangleShape2D_k543t")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="map/StaticBody2D"]
+position = Vector2(-245.75, -73)
+shape = SubResource("RectangleShape2D_0tfix")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="map/StaticBody2D"]
+position = Vector2(-379.5, 25.5)
+shape = SubResource("RectangleShape2D_t68yo")
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="map/StaticBody2D"]
+position = Vector2(-373.5, 178)
+shape = SubResource("RectangleShape2D_448op")
+
 [node name="karakter" type="CharacterBody2D" parent="map"]
 position = Vector2(-707, 31)
 scale = Vector2(1.5, 1.5)
@@ -230,12 +306,12 @@ z_as_relative = false
 texture_filter = 1
 position = Vector2(169.33333, -109.333336)
 scale = Vector2(0.5388127, 0.72093016)
-sprite_frames = SubResource("SpriteFrames_6hgtc")
+sprite_frames = SubResource("SpriteFrames_ixvhl")
 animation = &"diam"
 autoplay = "diam"
 speed_scale = 1.75
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="map/karakter"]
-position = Vector2(183.33333, -71.33333)
-shape = SubResource("CapsuleShape2D_3rm10")
+position = Vector2(182.66666, -55.999992)
+shape = SubResource("CapsuleShape2D_6au2l")

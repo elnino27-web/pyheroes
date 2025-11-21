@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dfpcg55cfoo41"]
+[gd_scene load_steps=28 format=3 uid="uid://dfpcg55cfoo41"]
 
 [ext_resource type="Script" uid="uid://884sqn18u5mv" path="res://maps/inOut/logic/level1.gd" id="1_0bhtf"]
 [ext_resource type="Texture2D" uid="uid://dad7t7262xh2t" path="res://assets/Backgound/level1_scene.png" id="2_cxhju"]
@@ -7,6 +7,17 @@
 [ext_resource type="Texture2D" uid="uid://c87v032h6thhx" path="res://assets/Button/maps/petunjuk_map.png" id="5_qmugv"]
 [ext_resource type="Script" uid="uid://3b0vplg4f7u1" path="res://maps/karakter/karakter.gd" id="6_ggim2"]
 [ext_resource type="Texture2D" uid="uid://dho2ihxnledh6" path="res://assets/player.png" id="7_26hoq"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ggim2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_26hoq"]
+size = Vector2(17, 511)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qmugv"]
+size = Vector2(693, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p25a3"]
+size = Vector2(17, 511)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_elquc"]
 atlas = ExtResource("7_26hoq")
@@ -64,7 +75,7 @@ region = Rect2(948, 688, 79, 86)
 atlas = ExtResource("7_26hoq")
 region = Rect2(869, 688, 79, 86)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_qmugv"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_sn7vg"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -179,9 +190,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p25a3"]
-radius = 7.3333435
-height = 42.666687
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dbgvi"]
+radius = 6.0
+height = 12.0
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_0bhtf")
@@ -220,6 +231,29 @@ focus_mode = 0
 icon = ExtResource("5_qmugv")
 flat = true
 
+[node name="StaticBody2D" type="StaticBody2D" parent="map"]
+physics_material_override = SubResource("PhysicsMaterial_ggim2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="map/StaticBody2D"]
+position = Vector2(220, -1.5)
+shape = SubResource("RectangleShape2D_26hoq")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="map/StaticBody2D"]
+position = Vector2(-468, 1)
+shape = SubResource("RectangleShape2D_26hoq")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="map/StaticBody2D"]
+position = Vector2(-120.5, -185)
+shape = SubResource("RectangleShape2D_qmugv")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="map/StaticBody2D"]
+position = Vector2(-120.5, 255)
+shape = SubResource("RectangleShape2D_qmugv")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="map/StaticBody2D"]
+position = Vector2(142, -6)
+shape = SubResource("RectangleShape2D_p25a3")
+
 [node name="karakter" type="CharacterBody2D" parent="map"]
 position = Vector2(-707, 31)
 scale = Vector2(1.5, 1.5)
@@ -230,12 +264,12 @@ z_as_relative = false
 texture_filter = 1
 position = Vector2(581.3333, 73.333336)
 scale = Vector2(0.5388127, 0.72093016)
-sprite_frames = SubResource("SpriteFrames_qmugv")
-animation = &"jalan_atas"
+sprite_frames = SubResource("SpriteFrames_sn7vg")
+animation = &"diam"
 autoplay = "diam"
 speed_scale = 1.75
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="map/karakter"]
-position = Vector2(594.6667, 110.66668)
-shape = SubResource("CapsuleShape2D_p25a3")
+position = Vector2(594.6667, 126.000015)
+shape = SubResource("CapsuleShape2D_dbgvi")
