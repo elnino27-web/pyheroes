@@ -81,16 +81,16 @@ func _animasi_tombol_masuk():
 # 🔸 Aksi Tombol
 # ==========================
 func _on_bermain_pressed():
-	click.play_click()
+	GlobalAudio.play_click()
 	await get_tree().create_timer(0.1).timeout
 	get_tree().change_scene_to_file("res://ui/menu_kuis/menu.tscn")
 
 func _on_petunjuk_pressed():
-	click.play_click()
+	GlobalAudio.play_click()
 	await get_tree().create_timer(0.1).timeout
 	print("Menampilkan petunjuk...")
 
 func _on_keluar_pressed():
-	click.play_click()
+	GlobalAudio.play_click()
 	await get_tree().create_timer(0.1).timeout
 	get_tree().change_scene_to_file("res://ui/popup/poput_exit.tscn")

@@ -1,12 +1,14 @@
-[gd_scene load_steps=31 format=3 uid="uid://dsug3altjxgyw"]
+[gd_scene load_steps=34 format=3 uid="uid://dsug3altjxgyw"]
 
 [ext_resource type="Script" uid="uid://2p8uyb1atu8p" path="res://maps/ifElse/logic/level3.gd" id="1_wop15"]
 [ext_resource type="Texture2D" uid="uid://b5t7n62ihqhgw" path="res://assets/Backgound/level3_scene.png" id="2_w5g4o"]
 [ext_resource type="Texture2D" uid="uid://5yk4bllahhph" path="res://assets/Button/maps/run.png" id="3_88t6o"]
 [ext_resource type="Texture2D" uid="uid://cqqa07t1lte16" path="res://assets/Button/maps/back_map.png" id="4_xbmyt"]
 [ext_resource type="Texture2D" uid="uid://c87v032h6thhx" path="res://assets/Button/maps/petunjuk_map.png" id="5_hqiwn"]
-[ext_resource type="Script" uid="uid://3b0vplg4f7u1" path="res://maps/karakter/karakter.gd" id="6_88t6o"]
+[ext_resource type="Texture2D" uid="uid://1dglhky1k5vh" path="res://assets/Other/papan_next_level.png" id="7_hqiwn"]
 [ext_resource type="Texture2D" uid="uid://dho2ihxnledh6" path="res://assets/player.png" id="7_xbmyt"]
+[ext_resource type="Texture2D" uid="uid://luw6laahs8om" path="res://assets/Button/maps/lanjut.png" id="8_t1c24"]
+[ext_resource type="Texture2D" uid="uid://d3gn5muckqffd" path="res://assets/Button/maps/ulang.png" id="9_4245v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_elquc"]
 atlas = ExtResource("7_xbmyt")
@@ -203,6 +205,9 @@ size = Vector2(221, 26)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1lxip"]
 size = Vector2(19, 173)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kb2om"]
+size = Vector2(65, 38)
+
 [node name="Level3" type="Node2D"]
 script = ExtResource("1_wop15")
 
@@ -243,7 +248,6 @@ flat = true
 [node name="karakter" type="CharacterBody2D" parent="map"]
 position = Vector2(-707, 31)
 scale = Vector2(1.5, 1.5)
-script = ExtResource("6_88t6o")
 
 [node name="karaktermap2" type="AnimatedSprite2D" parent="map/karakter"]
 z_as_relative = false
@@ -302,3 +306,58 @@ shape = SubResource("RectangleShape2D_f3ksx")
 [node name="CollisionShape2D10" type="CollisionShape2D" parent="map/StaticBody2D"]
 position = Vector2(141, -90.5)
 shape = SubResource("RectangleShape2D_1lxip")
+
+[node name="TextEdit" type="TextEdit" parent="map"]
+texture_filter = 1
+offset_left = 236.0
+offset_top = -245.0
+offset_right = 458.0
+offset_bottom = 109.0
+pivot_offset = Vector2(111, 155)
+theme_override_font_sizes/font_size = 12
+
+[node name="FinishArea" type="Area2D" parent="map"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="map/FinishArea"]
+position = Vector2(182, -140)
+shape = SubResource("RectangleShape2D_kb2om")
+
+[node name="UI_Finish" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="UI_Finish"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -262.5
+offset_top = -175.0
+offset_right = 262.5
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_hqiwn")
+metadata/_edit_use_anchors_ = true
+
+[node name="TombolLanjut" type="Button" parent="UI_Finish/TextureRect"]
+layout_mode = 0
+offset_left = 275.0
+offset_top = 275.0
+offset_right = 458.0
+offset_bottom = 318.0
+pivot_offset = Vector2(91.5, 21.5)
+focus_mode = 0
+icon = ExtResource("8_t1c24")
+flat = true
+
+[node name="TombolUlangi" type="Button" parent="UI_Finish/TextureRect"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 275.0
+offset_right = 248.0
+offset_bottom = 318.0
+pivot_offset = Vector2(91.5, 21.5)
+focus_mode = 0
+icon = ExtResource("9_4245v")
+flat = true

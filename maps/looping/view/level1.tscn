@@ -1,12 +1,14 @@
-[gd_scene load_steps=28 format=3 uid="uid://dcqok0ojh26ss"]
+[gd_scene load_steps=30 format=3 uid="uid://dcqok0ojh26ss"]
 
 [ext_resource type="Texture2D" uid="uid://dad7t7262xh2t" path="res://assets/Backgound/level1_scene.png" id="1_e3we3"]
 [ext_resource type="Script" uid="uid://l2k4ylm80emc" path="res://maps/looping/logic/level1.gd" id="1_uasyb"]
 [ext_resource type="Texture2D" uid="uid://5yk4bllahhph" path="res://assets/Button/maps/run.png" id="2_uasyb"]
 [ext_resource type="Texture2D" uid="uid://cqqa07t1lte16" path="res://assets/Button/maps/back_map.png" id="3_m6us2"]
 [ext_resource type="Texture2D" uid="uid://c87v032h6thhx" path="res://assets/Button/maps/petunjuk_map.png" id="4_yi0iq"]
-[ext_resource type="Script" uid="uid://3b0vplg4f7u1" path="res://maps/karakter/karakter.gd" id="6_yi0iq"]
 [ext_resource type="Texture2D" uid="uid://dho2ihxnledh6" path="res://assets/player.png" id="7_0op8q"]
+[ext_resource type="Texture2D" uid="uid://1dglhky1k5vh" path="res://assets/Other/papan_next_level.png" id="7_6vpwh"]
+[ext_resource type="Texture2D" uid="uid://luw6laahs8om" path="res://assets/Button/maps/lanjut.png" id="8_we5xt"]
+[ext_resource type="Texture2D" uid="uid://d3gn5muckqffd" path="res://assets/Button/maps/ulang.png" id="9_v40tq"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yi0iq"]
 
@@ -257,7 +259,6 @@ shape = SubResource("RectangleShape2D_we5xt")
 [node name="karakter" type="CharacterBody2D" parent="map"]
 position = Vector2(-707, 31)
 scale = Vector2(1.5, 1.5)
-script = ExtResource("6_yi0iq")
 
 [node name="karaktermap2" type="AnimatedSprite2D" parent="map/karakter"]
 z_as_relative = false
@@ -273,3 +274,51 @@ centered = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="map/karakter"]
 position = Vector2(594.6667, 126.000015)
 shape = SubResource("CapsuleShape2D_d0n7y")
+
+[node name="TextEdit" type="TextEdit" parent="map"]
+texture_filter = 1
+offset_left = 236.0
+offset_top = -245.0
+offset_right = 458.0
+offset_bottom = 109.0
+pivot_offset = Vector2(111, 155)
+theme_override_font_sizes/font_size = 12
+
+[node name="UI_Finish" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="UI_Finish"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -262.5
+offset_top = -175.0
+offset_right = 262.5
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_6vpwh")
+metadata/_edit_use_anchors_ = true
+
+[node name="TombolLanjut" type="Button" parent="UI_Finish/TextureRect"]
+layout_mode = 0
+offset_left = 275.0
+offset_top = 275.0
+offset_right = 458.0
+offset_bottom = 318.0
+pivot_offset = Vector2(91.5, 21.5)
+focus_mode = 0
+icon = ExtResource("8_we5xt")
+flat = true
+
+[node name="TombolUlangi" type="Button" parent="UI_Finish/TextureRect"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 275.0
+offset_right = 248.0
+offset_bottom = 318.0
+pivot_offset = Vector2(91.5, 21.5)
+focus_mode = 0
+icon = ExtResource("9_v40tq")
+flat = true

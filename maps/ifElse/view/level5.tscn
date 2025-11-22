@@ -1,12 +1,43 @@
-[gd_scene load_steps=34 format=3 uid="uid://b3qbu3aqrkwkx"]
+[gd_scene load_steps=37 format=3 uid="uid://b3qbu3aqrkwkx"]
 
 [ext_resource type="Script" uid="uid://cw36ojo3jfki2" path="res://maps/ifElse/logic/level5.gd" id="1_b8ko5"]
 [ext_resource type="Texture2D" uid="uid://4fcf7v0l20o8" path="res://assets/Backgound/level5_scene.png" id="2_eha2s"]
 [ext_resource type="Texture2D" uid="uid://5yk4bllahhph" path="res://assets/Button/maps/run.png" id="3_cfxrs"]
 [ext_resource type="Texture2D" uid="uid://cqqa07t1lte16" path="res://assets/Button/maps/back_map.png" id="4_8nu3f"]
 [ext_resource type="Texture2D" uid="uid://c87v032h6thhx" path="res://assets/Button/maps/petunjuk_map.png" id="5_joq4p"]
-[ext_resource type="Script" uid="uid://3b0vplg4f7u1" path="res://maps/karakter/karakter.gd" id="6_cfxrs"]
 [ext_resource type="Texture2D" uid="uid://dho2ihxnledh6" path="res://assets/player.png" id="7_8nu3f"]
+[ext_resource type="Texture2D" uid="uid://cx53php7iod5s" path="res://assets/Other/papan_next_materi.png" id="7_joq4p"]
+[ext_resource type="Texture2D" uid="uid://luw6laahs8om" path="res://assets/Button/maps/lanjut.png" id="8_016kn"]
+[ext_resource type="Texture2D" uid="uid://d3gn5muckqffd" path="res://assets/Button/maps/ulang.png" id="9_nlhdq"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cfxrs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8nu3f"]
+size = Vector2(17, 511)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_joq4p"]
+size = Vector2(693, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_016kn"]
+size = Vector2(110, 170)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nlhdq"]
+size = Vector2(50, 300)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2yx06"]
+size = Vector2(177, 258)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_at3ic"]
+size = Vector2(128, 207)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ndknf"]
+size = Vector2(426.5, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5bbpe"]
+size = Vector2(47, 175)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a8we2"]
+size = Vector2(171, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_elquc"]
 atlas = ExtResource("7_8nu3f")
@@ -64,7 +95,7 @@ region = Rect2(948, 688, 79, 86)
 atlas = ExtResource("7_8nu3f")
 region = Rect2(869, 688, 79, 86)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_joq4p"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_eha2s"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -179,38 +210,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_016kn"]
-radius = 6.000002
-height = 12.000004
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cfxrs"]
+radius = 6.0
+height = 12.0
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cfxrs"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8nu3f"]
-size = Vector2(17, 511)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_joq4p"]
-size = Vector2(693, 11)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_016kn"]
-size = Vector2(110, 170)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nlhdq"]
-size = Vector2(50, 300)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2yx06"]
-size = Vector2(177, 258)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_at3ic"]
-size = Vector2(128, 207)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ndknf"]
-size = Vector2(426.5, 20)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5bbpe"]
-size = Vector2(47, 175)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a8we2"]
-size = Vector2(171, 20)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_olx1j"]
+size = Vector2(65, 38)
 
 [node name="Level5" type="Node2D"]
 script = ExtResource("1_b8ko5")
@@ -248,26 +253,6 @@ pivot_offset = Vector2(54, 14)
 focus_mode = 0
 icon = ExtResource("5_joq4p")
 flat = true
-
-[node name="karakter" type="CharacterBody2D" parent="map"]
-position = Vector2(-707, 31)
-scale = Vector2(1.5, 1.5)
-script = ExtResource("6_cfxrs")
-
-[node name="karaktermap2" type="AnimatedSprite2D" parent="map/karakter"]
-z_as_relative = false
-texture_filter = 1
-position = Vector2(169.33333, -109.333336)
-scale = Vector2(0.5388127, 0.72093016)
-sprite_frames = SubResource("SpriteFrames_joq4p")
-animation = &"diam"
-autoplay = "diam"
-speed_scale = 1.75
-centered = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="map/karakter"]
-position = Vector2(182.66666, -54.66665)
-shape = SubResource("CapsuleShape2D_016kn")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="map"]
 physics_material_override = SubResource("PhysicsMaterial_cfxrs")
@@ -315,3 +300,76 @@ shape = SubResource("RectangleShape2D_5bbpe")
 [node name="CollisionShape2D11" type="CollisionShape2D" parent="map/StaticBody2D"]
 position = Vector2(-373.5, 178)
 shape = SubResource("RectangleShape2D_a8we2")
+
+[node name="karakter" type="CharacterBody2D" parent="map"]
+position = Vector2(-707, 31)
+scale = Vector2(1.5, 1.5)
+
+[node name="karaktermap2" type="AnimatedSprite2D" parent="map/karakter"]
+z_as_relative = false
+texture_filter = 1
+position = Vector2(170, -106)
+scale = Vector2(0.5388127, 0.72093016)
+sprite_frames = SubResource("SpriteFrames_eha2s")
+animation = &"diam"
+autoplay = "diam"
+speed_scale = 1.75
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="map/karakter"]
+position = Vector2(183.33333, -49.999992)
+shape = SubResource("CapsuleShape2D_cfxrs")
+
+[node name="TextEdit" type="TextEdit" parent="map"]
+texture_filter = 1
+offset_left = 236.0
+offset_top = -245.0
+offset_right = 458.0
+offset_bottom = 109.0
+pivot_offset = Vector2(111, 155)
+theme_override_font_sizes/font_size = 12
+
+[node name="FinishArea" type="Area2D" parent="map"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="map/FinishArea"]
+position = Vector2(182, -140)
+shape = SubResource("RectangleShape2D_olx1j")
+
+[node name="UI_Finish" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="UI_Finish"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -262.5
+offset_top = -175.0
+offset_right = 262.5
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_joq4p")
+metadata/_edit_use_anchors_ = true
+
+[node name="TombolLanjut" type="Button" parent="UI_Finish/TextureRect"]
+layout_mode = 0
+offset_left = 275.0
+offset_top = 275.0
+offset_right = 458.0
+offset_bottom = 318.0
+pivot_offset = Vector2(91.5, 21.5)
+focus_mode = 0
+icon = ExtResource("8_016kn")
+flat = true
+
+[node name="TombolUlangi" type="Button" parent="UI_Finish/TextureRect"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 275.0
+offset_right = 248.0
+offset_bottom = 318.0
+pivot_offset = Vector2(91.5, 21.5)
+focus_mode = 0
+icon = ExtResource("9_nlhdq")
+flat = true

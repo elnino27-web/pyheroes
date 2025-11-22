@@ -92,31 +92,31 @@ func _animasi_tombol_masuk():
 		tween.tween_property(tombol_list[i], "scale", Vector2(1, 1), 0.2).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT).set_delay(i * delay)
 
 func _on_level1_pressed() -> void:
-	click.play_click()
+	GlobalAudio.play_click()
 	await get_tree().create_timer(0.1).timeout
 	get_tree().change_scene_to_file("res://maps/ifElse/view/level1.tscn")
 
 func _on_level2_pressed() -> void:
-	click.play_click()
+	GlobalAudio.play_click()
 	await get_tree().create_timer(0.1).timeout
 	get_tree().change_scene_to_file("res://maps/ifElse/view/level2.tscn")
 
 func _on_level3_pressed() -> void:
-	click.play_click()
+	GlobalAudio.play_click()
 	await get_tree().create_timer(0.1).timeout
 	get_tree().change_scene_to_file("res://maps/ifElse/view/level3.tscn")
 
 func _on_level4_pressed() -> void:
-	click.play_click()
+	GlobalAudio.play_click()
 	await get_tree().create_timer(0.1).timeout
 	get_tree().change_scene_to_file("res://maps/ifElse/view/level4.tscn")
 
 func _on_level5_pressed() -> void:
-	click.play_click()
+	GlobalAudio.play_click()
 	await get_tree().create_timer(0.1).timeout
 	get_tree().change_scene_to_file("res://maps/ifElse/view/level5.tscn")
 
 func _on_kembali_pressed() -> void:
-	click.play_click()
+	GlobalAudio.play_click()
 	await get_tree().create_timer(0.1).timeout
 	get_tree().change_scene_to_file("res://ui/menu_kuis/menu.tscn")
