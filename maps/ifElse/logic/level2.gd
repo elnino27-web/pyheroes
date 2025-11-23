@@ -22,17 +22,15 @@ var posisi_awal = Vector2.ZERO
 var game_selesai = false 
 var sedang_loop = false 
 
-# Menyimpan arah terakhir agar tidak balik badan
 var arah_terakhir = "" 
 
-# Petunjuk Baru
 var teks_petunjuk = """# Python Code:
 
-if bisa_gerak()
+if bisa_gerak():
    gerak('arah')
-elif:
+elif bisa_gerak():
    gerak('arah')
-elif:
+elif bisa_gerak():
    gerak('arah')
 else:
    gerak('diam')
@@ -68,59 +66,108 @@ func _ready():
 	sprite_animasi.play("diam")
 
 # ==========================
-# 🧠 LOGIKA AI (PRIORITAS)
+# 🧠 LOGIKA AI
 # ==========================
 func jalankan_kode_user():
 	if game_selesai: return
 	
-	var daftar_prioritas = parsing_prioritas_arah()
+	# Parsing Kode
+	var daftar_prioritas = parsing_prioritas_arah_python_asli()
 	
 	if daftar_prioritas.size() == 0:
-		print("Tidak ada perintah gerak() yang valid!")
-		return
+		# Cek apakah cuma ada perintah reset()
+		if "reset()" in input_area.text:
+			handle_reset_command()
+			return
+		else:
+			print("❌ Kode tidak valid.")
+			return
 	
+	# Cek jika perintah pertama adalah reset
+	if daftar_prioritas[0] == "RESET_GAME":
+		handle_reset_command()
+		return
+
 	sedang_loop = true
 	
-	# Loop Pergerakan
 	while sedang_loop and not game_selesai:
 		
 		var berhasil_gerak = false
 		
-		# Cek Prioritas (IF -> ELIF -> ELSE)
 		for arah in daftar_prioritas:
 			
-			# 1. Cek Perintah Diam (STOP TOTAL)
 			if arah == "diam":
 				print("Robot Berhenti (Perintah Diam)")
 				sedang_loop = false
+				GlobalAudio.stop_jalan()
 				sprite_animasi.play("diam")
-				return # Keluar total dari fungsi
+				return 
 			
-			# 2. Cek Validasi Gerak
 			if cek_validasi_gerak(arah):
-				# JALAN 1 LANGKAH
 				await gerakkan_player(arah)
 				berhasil_gerak = true
-				break # Kembali ke prioritas awal
+				break 
 		
-		# Jika Buntu Total (Semua prioritas gagal & tidak ada else diam)
 		if not berhasil_gerak:
 			print("Buntu Total -> Stop Loop")
 			sedang_loop = false
+			GlobalAudio.stop_jalan()
 			sprite_animasi.play("diam")
 			
 		await get_tree().create_timer(0.05).timeout 
 
-# Fungsi Parsing Strict
-func parsing_prioritas_arah() -> Array:
+# Fungsi khusus menangani reset()
+func handle_reset_command():
+	print("🔄 Mereset Game...")
+	reset_posisi_player()
+	input_area.text = teks_petunjuk
+	GlobalAudio.stop_jalan()
+
+# ==========================================
+# 🛠️ PARSING PYTHON ASLI (Strict) + RESET
+# ==========================================
+func parsing_prioritas_arah_python_asli() -> Array:
 	var hasil = []
 	var baris_kode = input_area.text.split("\n")
 	
-	for baris in baris_kode:
-		baris = baris.strip_edges()
-		if baris.begins_with("gerak("):
-			var isi_mentah = baris.split("gerak(")[1].split(")")[0].strip_edges()
+	for i in range(baris_kode.size()):
+		var baris_mentah = baris_kode[i]
+		var baris_bersih = baris_mentah.strip_edges()
+		
+		if baris_bersih == "" or baris_bersih.begins_with("#"): continue
+		
+		# [BARU] Cek Reset
+		if baris_bersih == "reset()":
+			hasil.append("RESET_GAME")
+			return hasil # Langsung kembalikan, abaikan kode lain
+		
+		# Cari baris yang ada "gerak("
+		if baris_bersih.begins_with("gerak("):
 			
+			# SYARAT 1: INDENTASI
+			if not (baris_mentah.begins_with(" ") or baris_mentah.begins_with("\t")):
+				print("❌ Error Baris ", i+1, ": (IndentationError) Baris harus menjorok.")
+				continue 
+			
+			# SYARAT 2: INDUK YANG VALID
+			var punya_induk_valid = false
+			for j in range(i-1, -1, -1):
+				var baris_atas = baris_kode[j].strip_edges()
+				if baris_atas == "" or baris_atas.begins_with("#"): continue 
+				
+				if baris_atas.ends_with(":"):
+					if baris_atas.begins_with("if") or baris_atas.begins_with("elif") or baris_atas.begins_with("else"):
+						punya_induk_valid = true
+					break 
+				else:
+					break
+			
+			if not punya_induk_valid:
+				print("❌ Error Baris ", i+1, ": (SyntaxError) Baris di atasnya harus if/elif/else dan titik dua (:).")
+				continue 
+			
+			# AMBIL ISI
+			var isi_mentah = baris_bersih.split("gerak(")[1].split(")")[0].strip_edges()
 			var pakai_kutip_satu = isi_mentah.begins_with("'") and isi_mentah.ends_with("'")
 			var pakai_kutip_dua  = isi_mentah.begins_with('"') and isi_mentah.ends_with('"')
 			
@@ -128,7 +175,7 @@ func parsing_prioritas_arah() -> Array:
 				var arah_bersih = isi_mentah.substr(1, isi_mentah.length() - 2).to_lower()
 				hasil.append(arah_bersih)
 			else:
-				print("Syntax Error: Parameter harus string! -> ", isi_mentah)
+				print("❌ Error Syntax: Parameter harus string! -> ", isi_mentah)
 				
 	return hasil
 
@@ -150,13 +197,13 @@ func cek_validasi_gerak(arah: String) -> bool:
 		"kiri":  vec = Vector2.LEFT * jarak_x
 		"atas":  vec = Vector2.UP * jarak_y
 		"bawah": vec = Vector2.DOWN * jarak_y
-		_: return false # Jaga-jaga jika arah aneh
+		_: return false
 
 	var tabrakan = player.move_and_collide(vec, true)
 	return tabrakan == null
 
 # ==========================
-# 🏃 GERAKAN PLAYER (FIXED AUDIO)
+# 🏃 GERAKAN PLAYER
 # ==========================
 func gerakkan_player(arah: String):
 	if game_selesai: return
@@ -165,27 +212,20 @@ func gerakkan_player(arah: String):
 	var jarak_y = 88
 	var vec = Vector2.ZERO
 	
-	# [FIX UTAMA DI SINI]
-	# Jika arah bukan kanan/kiri/atas/bawah (misal 'diam'), langsung BATALKAN.
-	# Ini mencegah audio jalan berbunyi.
 	match arah:
 		"kanan": vec = Vector2.RIGHT * jarak_x
 		"kiri":  vec = Vector2.LEFT * jarak_x
 		"atas":  vec = Vector2.UP * jarak_y
 		"bawah": vec = Vector2.DOWN * jarak_y
-		_: return # ⛔ STOP! Jangan lanjut ke bawah jika arah tidak dikenal/diam.
+		_: return 
 	
-	# 1. Update Animasi
 	var nama_anim = "diam"
 	var flip = false
-	
 	match arah:
 		"kanan": 
-			nama_anim = "jalan_kanan"
-			flip = false
+			nama_anim = "jalan_kanan"; flip = false
 		"kiri": 
-			nama_anim = "jalan_kiri"
-			flip = true
+			nama_anim = "jalan_kiri"; flip = true
 		"atas":  nama_anim = "jalan_atas"
 		"bawah": nama_anim = "jalan_bawah"
 	
@@ -193,16 +233,15 @@ func gerakkan_player(arah: String):
 	if sprite_animasi.animation != nama_anim:
 		sprite_animasi.play(nama_anim)
 	
-	# 2. Audio Jalan (Hanya bunyi jika lolos match di atas)
 	GlobalAudio.play_jalan()
 	arah_terakhir = arah 
 	
-	# 3. Gerakan Tween
 	var target_pos = player.position + vec
 	var tween = create_tween()
 	tween.tween_property(player, "position", target_pos, 0.4).set_trans(Tween.TRANS_LINEAR)
 	
 	await tween.finished
+	GlobalAudio.stop_jalan()
 
 # ==========================
 # 🛠️ HELPER & UTILS
@@ -213,20 +252,18 @@ func ambil_isi_kurung(teks):
 func setup_warna_kode():
 	var h = CodeHighlighter.new()
 	h.add_color_region("#", "", Color(0.3, 0.8, 0.3), true)
-	
 	h.add_keyword_color("gerak", Color("8be9fd")) 
 	h.add_keyword_color("bisa_gerak", Color("50fa7b")) 
 	h.add_keyword_color("if", Color("ff79c6"))
 	h.add_keyword_color("elif", Color("ff79c6"))
 	h.add_keyword_color("else", Color("ff79c6"))
+	h.add_keyword_color("reset", Color(1, 0.5, 0.5)) # Warna merah muda untuk reset
 	h.add_keyword_color("player", Color("ff5555"))
 	h.add_keyword_color("arah", Color("ffd6d6"))
-	
 	var c = Color(1,1,0)
 	h.add_keyword_color("kiri", c); h.add_keyword_color("kanan", c)
 	h.add_keyword_color("atas", c); h.add_keyword_color("bawah", c)
 	h.add_keyword_color("diam", c)
-	
 	input_area.syntax_highlighter = h
 
 func reset_posisi_player():
@@ -235,13 +272,12 @@ func reset_posisi_player():
 	sprite_animasi.flip_h = false
 	arah_terakhir = "" 
 	sedang_loop = false
+	GlobalAudio.stop_jalan()
 
-# ==========================
-# LOGIKA FINISH & TOMBOL
-# ==========================
 func _on_player_finish(body):
 	if body.name == "karakter" and not game_selesai:
 		print("🏆 MENANG!")
+		GlobalAudio.stop_jalan()
 		GlobalAudio.play_menang()
 		game_selesai = true
 		sedang_loop = false
@@ -263,7 +299,6 @@ func _on_ulangi_pressed():
 	tween.tween_property(tombol_ulangi, "scale", Vector2(1.0, 1.0), 0.05)
 	GlobalAudio.play_click()
 	await get_tree().create_timer(0.2).timeout
-	
 	ui_finish.visible = false
 	game_selesai = false
 	reset_posisi_player()
@@ -283,6 +318,7 @@ func _on_jalankan_pressed():
 func _on_kembali_pressed():
 	GlobalAudio.play_click()
 	sedang_loop = false
+	GlobalAudio.stop_jalan()
 	get_tree().change_scene_to_file("res://ui/menu_kuis/menu_latihan/if_else/if_else.tscn")
 func _on_petunjuk_pressed():
 	GlobalAudio.play_click()
