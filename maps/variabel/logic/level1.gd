@@ -10,7 +10,6 @@ extends Node
 @onready var player          = $map/karakter
 @onready var sprite_animasi  = $map/karakter/karaktermap2 
 
-# Referensi Finish & Popup
 @onready var finish_area     = $map/FinishArea
 @onready var ui_finish       = $UI_Finish
 @onready var tombol_lanjut   = $UI_Finish/TextureRect/TombolLanjut
@@ -22,27 +21,30 @@ extends Node
 var posisi_awal = Vector2.ZERO 
 var game_selesai = false 
 
-var teks_petunjuk = """# Python Code: """
+var teks_petunjuk = """# Python Code: 
+
+"""
 
 # ==========================
-# 🔹 SETUP AWAL (_ready)
+# 🔹 SETUP AWAL
 # ==========================
 func _ready():
-	# 1. FIX TAMPILAN
 	input_area.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	input_area.scale = Vector2(1, 1)
-	
 	posisi_awal = player.position
 	setup_warna_kode()
 	input_area.text = teks_petunjuk
 	
-	# 2. UI SETUP
 	ui_finish.visible = false
+	
+	# Pastikan interaksi nyala di awal
+	atur_interaksi(true)
+	
+	# Animasi Tombol Masuk
 	for tombol in [tombol_jalankan, tombol_kembali, tombol_petunjuk]:
 		tombol.scale = Vector2.ZERO
 	_animasi_tombol_masuk()
 
-	# 3. KONEKSI SINYAL
 	for b in [tombol_jalankan, tombol_kembali, tombol_petunjuk]:
 		b.mouse_entered.connect(_on_hover_entered.bind(b))
 		b.mouse_exited.connect(_on_hover_exited.bind(b))
@@ -52,124 +54,33 @@ func _ready():
 	tombol_petunjuk.pressed.connect(_on_petunjuk_pressed)
 	
 	finish_area.body_entered.connect(_on_player_finish)
-	
 	tombol_lanjut.pressed.connect(_on_lanjut_pressed)
 	tombol_ulangi.pressed.connect(_on_ulangi_pressed)
 	
 	sprite_animasi.play("diam")
 
 # ==========================
-# 🏆 LOGIKA FINISH & POPUP
+# 🔒 FUNGSI KUNCI INTERAKSI (UPDATE FINAL)
 # ==========================
-func _on_player_finish(body):
-	if body.name == "karakter" and not game_selesai:
-		print("🏆 MENANG!")
-		
-		# Panggil Suara Menang (Global)
-		GlobalAudio.play_menang()
-		
-		game_selesai = true
-		sprite_animasi.play("diam")
-		await get_tree().create_timer(0.5).timeout
-		ui_finish.visible = true
-
-func _on_lanjut_pressed():
-	# Animasi tombol lanjut
-	var tween = create_tween()
-	tween.tween_property(tombol_lanjut, "scale", Vector2(0.9, 0.9), 0.05)
-	tween.tween_property(tombol_lanjut, "scale", Vector2(1.0, 1.0), 0.05)
+func atur_interaksi(aktif: bool):
+	# 1. Matikan Input Teks
+	input_area.editable = aktif 
 	
-	# Panggil fungsi klik (Global)
-	GlobalAudio.play_click()
+	# 2. Atur Mouse Filter (Kunci agar tidak ada hover)
+	var filter_mouse = Control.MOUSE_FILTER_STOP if aktif else Control.MOUSE_FILTER_IGNORE
 	
-	await get_tree().create_timer(0.2).timeout
-	get_tree().change_scene_to_file("res://maps/variabel/view/level2.tscn")
-
-func _on_ulangi_pressed():
-	# Animasi tombol ulangi
-	var tween = create_tween()
-	tween.tween_property(tombol_ulangi, "scale", Vector2(0.9, 0.9), 0.05)
-	tween.tween_property(tombol_ulangi, "scale", Vector2(1.0, 1.0), 0.05)
+	tombol_jalankan.mouse_filter = filter_mouse
+	tombol_kembali.mouse_filter = filter_mouse
+	tombol_petunjuk.mouse_filter = filter_mouse
 	
-	GlobalAudio.play_click()
-	
-	await get_tree().create_timer(0.2).timeout
-	
-	# 1. Tutup Popup
-	ui_finish.visible = false
-	
-	# 2. Reset Status Game
-	game_selesai = false
-	
-	# 3. Kembalikan Player ke Awal
-	reset_posisi_player()
-	
-	# 4. RESET TEKS KODE
-	input_area.text = teks_petunjuk 
-
-
-# ==========================================
-# 🎨 PEWARNAAN KODE
-# ==========================================
-func setup_warna_kode():
-	var highlighter = CodeHighlighter.new()
-	highlighter.add_color_region("#", "", Color(0.3, 0.8, 0.3), true) 
-	highlighter.add_keyword_color("print", Color("8be9fd")) 
-	highlighter.add_keyword_color("reset", Color(1, 0.5, 0.5))
-	
-	var warna_arah = Color(1, 1, 0)
-	highlighter.add_keyword_color("kiri", warna_arah)
-	highlighter.add_keyword_color("kanan", warna_arah)
-	highlighter.add_keyword_color("atas", warna_arah)
-	highlighter.add_keyword_color("bawah", warna_arah)
-	
-	input_area.syntax_highlighter = highlighter
+	# 3. Efek Visual (Transparan jika mati)
+	var alpha = 1.0 if aktif else 0.5
+	tombol_jalankan.modulate.a = alpha
+	tombol_kembali.modulate.a = alpha
+	tombol_petunjuk.modulate.a = alpha
 
 # ==========================
-# 🔸 EFEK TOMBOL UTAMA
-# ==========================
-func _on_hover_entered(button):
-	create_tween().tween_property(button, "scale", Vector2(1.1, 1.1), 0.1)
-func _on_hover_exited(button):
-	create_tween().tween_property(button, "scale", Vector2(1.0, 1.0), 0.1)
-
-func _animasi_tombol_masuk():
-	var tween = create_tween()
-	var tombols = [tombol_jalankan, tombol_kembali, tombol_petunjuk]
-	for i in range(tombols.size()):
-		tween.tween_property(tombols[i], "scale", Vector2.ONE, 0.2)\
-			.set_trans(Tween.TRANS_BACK).set_delay(i * 0.1)
-
-func _on_jalankan_pressed():
-	if game_selesai: return
-	
-	var tween = create_tween()
-	tween.tween_property(tombol_jalankan, "scale", Vector2(0.9, 0.9), 0.05)
-	tween.tween_property(tombol_jalankan, "scale", Vector2(1.0, 1.0), 0.05)
-	
-	GlobalAudio.play_click()
-	
-	reset_posisi_player()
-	await get_tree().create_timer(0.2).timeout
-	jalankan_kode_user()
-
-func _on_kembali_pressed():
-	GlobalAudio.play_click()
-	await get_tree().create_timer(0.1).timeout
-	get_tree().change_scene_to_file("res://ui/menu_kuis/menu_latihan/variabel/variabel.tscn")
-
-func _on_petunjuk_pressed():
-	GlobalAudio.play_click()
-	await get_tree().create_timer(0.1).timeout
-	input_area.text = teks_petunjuk 
-
-func reset_posisi_player():
-	player.position = posisi_awal
-	sprite_animasi.play("diam")
-	sprite_animasi.flip_h = false
-
-# ==========================
-# 🧠 LOGIKA PARSING (STRICT PYTHON)
+# 🧠 LOGIKA PARSING
 # ==========================
 func jalankan_kode_user():
 	if not input_area: return
@@ -184,7 +95,7 @@ func jalankan_kode_user():
 		baris = baris.strip_edges()
 		if baris == "" or baris.begins_with("#"): continue
 			
-		# 1. VARIABEL (Strict Mode)
+		# 1. VARIABLE
 		if "=" in baris and not baris.begins_with("print"):
 			var bagian = baris.split("=")
 			if bagian.size() == 2:
@@ -198,7 +109,7 @@ func jalankan_kode_user():
 					var nilai_bersih = nilai_raw.substr(1, nilai_raw.length() - 2).to_lower()
 					memori_variabel[nama_var] = nilai_bersih
 				else:
-					print("ERROR SYNTAX: String harus pakai kutip! -> ", nilai_raw)
+					print("❌ Error: Nilai string harus pakai kutip! -> ", nilai_raw)
 		
 		# 2. RESET
 		elif baris == "reset()":
@@ -206,7 +117,7 @@ func jalankan_kode_user():
 			input_area.text = teks_petunjuk 
 			await get_tree().create_timer(0.5).timeout
 			
-		# 3. PRINT
+		# 3. PRINT (Strict Variable)
 		elif baris.begins_with("print("):
 			var jumlah_ulang = 1
 			var teks_bersih = baris
@@ -219,63 +130,57 @@ func jalankan_kode_user():
 			var isi = teks_bersih.replace("print(", "").replace(")", "").strip_edges()
 			var arah_gerak = ""
 			
+			var is_string_langsung = (isi.begins_with("'") and isi.ends_with("'")) or \
+									 (isi.begins_with('"') and isi.ends_with('"'))
+			
+			if is_string_langsung:
+				print("❌ DILARANG: Jangan print string langsung! Gunakan variabel.")
+				continue 
+			
 			if memori_variabel.has(isi):
 				arah_gerak = memori_variabel[isi]
 			else:
-				var pakai_kutip_satu = isi.begins_with("'") and isi.ends_with("'")
-				var pakai_kutip_dua  = isi.begins_with('"') and isi.ends_with('"')
-				
-				if pakai_kutip_satu or pakai_kutip_dua:
-					arah_gerak = isi.replace("'", "").replace('"', "").to_lower()
-				else:
-					print("NameError: Variabel '", isi, "' tidak ditemukan.")
-					continue 
+				print("❌ NameError: Variabel '", isi, "' tidak ditemukan.")
+				continue 
 
 			for i in range(jumlah_ulang):
 				if game_selesai: break 
 				await gerakkan_player(arah_gerak)
 
 # ==========================
-# 🏃 GERAKAN PLAYER (MULUS / LINEAR)
+# 🏃 GERAKAN PLAYER
 # ==========================
 func gerakkan_player(arah: String):
 	if game_selesai: return
 
-	# GRID KHUSUS (Horizontal 121, Vertikal 88)
-	var jarak_grid_x = 121
-	var jarak_grid_y = 88
-	var vector_arah = Vector2.ZERO
+	var jarak_x = 121
+	var jarak_y = 88
+	var vec = Vector2.ZERO
 	
 	match arah:
-		"kanan": vector_arah = Vector2.RIGHT * jarak_grid_x
-		"kiri":  vector_arah = Vector2.LEFT * jarak_grid_x
-		"atas":  vector_arah = Vector2.UP * jarak_grid_y
-		"bawah": vector_arah = Vector2.DOWN * jarak_grid_y
-		_: return
+		"kanan": vec = Vector2.RIGHT * jarak_x
+		"kiri":  vec = Vector2.LEFT * jarak_x
+		"atas":  vec = Vector2.UP * jarak_y
+		"bawah": vec = Vector2.DOWN * jarak_y
+		_: return 
 
-	var tabrakan = player.move_and_collide(vector_arah, true)
+	var tabrakan = player.move_and_collide(vec, true)
 	
 	if tabrakan:
 		GlobalAudio.play_nabrak()
 		update_animasi(arah, false)
-		
 		var tween = create_tween()
-		tween.tween_property(player, "position", player.position + (vector_arah * 0.2), 0.1)
+		tween.tween_property(player, "position", player.position + (vec * 0.2), 0.1)
 		tween.tween_property(player, "position", player.position, 0.1)
 		await tween.finished
 	else:
 		GlobalAudio.play_jalan()
 		update_animasi(arah, true)
-		
-		var target_pos = player.position + vector_arah
+		var target_pos = player.position + vec
 		var tween = create_tween()
-		
-		# 🚀 [PERUBAHAN UTAMA DI SINI] 🚀
-		# 1. Durasi dipercepat jadi 0.3 (biar responsif)
-		# 2. Transisi LINEAR (biar kecepatan konstan, tidak ada rem di akhir)
 		tween.tween_property(player, "position", target_pos, 0.5).set_trans(Tween.TRANS_LINEAR)
-		
 		await tween.finished
+		GlobalAudio.stop_jalan()
 		update_animasi(arah, false)
 
 func update_animasi(arah_sekarang: String, sedang_bergerak: bool):
@@ -293,3 +198,93 @@ func update_animasi(arah_sekarang: String, sedang_bergerak: bool):
 	elif arah_sekarang == "bawah":
 		if sedang_bergerak: sprite_animasi.play("jalan_bawah")
 		else: sprite_animasi.play("diam")
+
+# ==========================
+# UTILS & UI
+# ==========================
+func setup_warna_kode():
+	var h = CodeHighlighter.new()
+	h.add_color_region("#", "", Color(0.3, 0.8, 0.3), true) 
+	h.add_keyword_color("print", Color("8be9fd")) 
+	h.add_keyword_color("reset", Color(1, 0.5, 0.5))
+	var c = Color(1, 1, 0)
+	h.add_keyword_color("kiri", c); h.add_keyword_color("kanan", c)
+	h.add_keyword_color("atas", c); h.add_keyword_color("bawah", c)
+	input_area.syntax_highlighter = h
+
+func reset_posisi_player():
+	player.position = posisi_awal
+	sprite_animasi.play("diam")
+	sprite_animasi.flip_h = false
+	GlobalAudio.stop_jalan() 
+
+func _on_player_finish(body):
+	if body.name == "karakter" and not game_selesai:
+		print("🏆 MENANG!")
+		GlobalAudio.stop_jalan()
+		GlobalAudio.play_menang()
+		game_selesai = true
+		sprite_animasi.play("diam")
+		
+		# KUNCI INTERAKSI (BEKU TOTAL)
+		atur_interaksi(false)
+		
+		await get_tree().create_timer(0.5).timeout
+		ui_finish.visible = true
+
+func _on_lanjut_pressed():
+	var tween = create_tween()
+	tween.tween_property(tombol_lanjut, "scale", Vector2(0.9, 0.9), 0.05)
+	tween.tween_property(tombol_lanjut, "scale", Vector2(1.0, 1.0), 0.05)
+	GlobalAudio.play_click()
+	await get_tree().create_timer(0.2).timeout
+	get_tree().change_scene_to_file("res://maps/variabel/view/level2.tscn")
+
+func _on_ulangi_pressed():
+	var tween = create_tween()
+	tween.tween_property(tombol_ulangi, "scale", Vector2(0.9, 0.9), 0.05)
+	tween.tween_property(tombol_ulangi, "scale", Vector2(1.0, 1.0), 0.05)
+	GlobalAudio.play_click()
+	await get_tree().create_timer(0.2).timeout
+	
+	ui_finish.visible = false
+	game_selesai = false
+	
+	# BUKA KUNCI (NORMAL KEMBALI)
+	atur_interaksi(true)
+	
+	reset_posisi_player()
+	input_area.text = teks_petunjuk
+	
+	# Bangunkan Kursor
+	await get_tree().process_frame
+	input_area.grab_focus()
+	input_area.caret_blink = false
+	input_area.caret_blink = true
+	input_area.set_caret_line(input_area.get_line_count() - 1)
+	input_area.set_caret_column(input_area.get_line(input_area.get_line_count() - 1).length())
+
+func _on_jalankan_pressed():
+	if game_selesai: return
+	var tween = create_tween()
+	tween.tween_property(tombol_jalankan, "scale", Vector2(0.9, 0.9), 0.05)
+	tween.tween_property(tombol_jalankan, "scale", Vector2(1.0, 1.0), 0.05)
+	GlobalAudio.play_click()
+	reset_posisi_player()
+	await get_tree().create_timer(0.2).timeout
+	jalankan_kode_user()
+
+func _on_kembali_pressed():
+	GlobalAudio.play_click()
+	GlobalAudio.stop_jalan()
+	await get_tree().create_timer(0.1).timeout
+	get_tree().change_scene_to_file("res://ui/menu_kuis/menu_latihan/variabel/variabel.tscn")
+func _on_petunjuk_pressed():
+	GlobalAudio.play_click()
+	await get_tree().create_timer(0.1).timeout
+	input_area.text = teks_petunjuk 
+func _on_hover_entered(b): create_tween().tween_property(b, "scale", Vector2(1.1, 1.1), 0.1)
+func _on_hover_exited(b): create_tween().tween_property(b, "scale", Vector2(1.0, 1.0), 0.1)
+func _animasi_tombol_masuk():
+	for b in [tombol_jalankan, tombol_kembali, tombol_petunjuk]:
+		create_tween().tween_property(b, "scale", Vector2.ONE, 0.2).set_trans(Tween.TRANS_BACK)
