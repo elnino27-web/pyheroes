@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://ce1mvtvk5q5vo"]
 
-[ext_resource type="Script" uid="uid://cgpxojjaqggnd" path="res://ui/menu_kuis/menu_latihan/input_output/input_output.gd" id="1_yuple"]
+[ext_resource type="Script" uid="uid://cgpxojjaqggnd" path="res://ui/menu_kuis/menu_latihan/inOut/input_output.gd" id="1_yuple"]
 [ext_resource type="Texture2D" uid="uid://d2fam1e2fdjrl" path="res://assets/Backgound/layerUtama.jpg" id="2_21aro"]
 [ext_resource type="Texture2D" uid="uid://bw573q761qiju" path="res://assets/Backgound/layerMenu.png" id="3_78l4o"]
 [ext_resource type="Texture2D" uid="uid://cgyhwqndiapxq" path="res://assets/Other/papan_inout.png" id="4_21aro"]
