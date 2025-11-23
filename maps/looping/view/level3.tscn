@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cijuloix8cp4u"]
+[gd_scene load_steps=34 format=3 uid="uid://cijuloix8cp4u"]
 
 [ext_resource type="Script" uid="uid://bidqqaap0bq5b" path="res://maps/looping/logic/level3.gd" id="1_ykwnu"]
 [ext_resource type="Texture2D" uid="uid://b5t7n62ihqhgw" path="res://assets/Backgound/level3_scene.png" id="2_sknf2"]
@@ -205,6 +205,9 @@ animations = [{
 radius = 5.333313
 height = 10.666626
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fntqv"]
+size = Vector2(65, 38)
+
 [node name="Level3" type="Node2D"]
 script = ExtResource("1_ykwnu")
 
@@ -312,6 +315,12 @@ offset_right = 458.0
 offset_bottom = 109.0
 pivot_offset = Vector2(111, 155)
 theme_override_font_sizes/font_size = 12
+
+[node name="FinishArea" type="Area2D" parent="map"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="map/FinishArea"]
+position = Vector2(182, -140)
+shape = SubResource("RectangleShape2D_fntqv")
 
 [node name="UI_Finish" type="CanvasLayer" parent="."]
 
