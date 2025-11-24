@@ -15,6 +15,9 @@ extends Node
 @onready var tombol_lanjut   = $UI_Finish/TextureRect/TombolLanjut
 @onready var tombol_ulangi   = $UI_Finish/TextureRect/TombolUlangi 
 
+@onready var ui_petunjuk     = $UI_Tips
+@onready var tombol_go       = $UI_Tips/TextureRect/go
+
 # ==========================
 # 📝 VARIABEL GLOBAL
 # ==========================
@@ -47,6 +50,8 @@ func _ready():
 	input_area.text = teks_petunjuk
 	
 	ui_finish.visible = false
+	ui_petunjuk.visible = false
+	
 	atur_interaksi(true)
 	
 	for tombol in [tombol_jalankan, tombol_kembali, tombol_petunjuk]:
@@ -64,6 +69,8 @@ func _ready():
 	finish_area.body_entered.connect(_on_player_finish)
 	tombol_lanjut.pressed.connect(_on_lanjut_pressed)
 	tombol_ulangi.pressed.connect(_on_ulangi_pressed)
+	
+	tombol_go.pressed.connect(_on_go_pressed)
 	
 	sprite_animasi.play("diam")
 
@@ -410,14 +417,44 @@ func _on_jalankan_pressed():
 	jalankan_kode_user()
 
 func _on_kembali_pressed():
+	var tween = create_tween()
+	tween.tween_property(tombol_kembali, "scale", Vector2(0.9, 0.9), 0.05)
+	tween.tween_property(tombol_kembali, "scale", Vector2(1.0, 1.0), 0.05)
 	GlobalAudio.play_click()
+	await get_tree().create_timer(0.2).timeout
 	sedang_loop = false
 	GlobalAudio.stop_jalan()
 	get_tree().change_scene_to_file("res://ui/menu_kuis/menu_latihan/looping/looping.tscn")
+	
 func _on_petunjuk_pressed():
+	var tween = create_tween()
+	tween.tween_property(tombol_petunjuk, "scale", Vector2(0.9, 0.9), 0.05)
+	tween.tween_property(tombol_petunjuk, "scale", Vector2(1.0, 1.0), 0.05)
 	GlobalAudio.play_click()
-	await get_tree().create_timer(0.1).timeout
-	input_area.text = teks_petunjuk
+	await get_tree().create_timer(0.2).timeout
+	ui_petunjuk.visible = true
+	atur_interaksi(false)  # Matikan tombol lain
+	input_area.editable = false   # Matikan ketik
+
+func _on_go_pressed():
+	var tween = create_tween()
+	tween.tween_property(tombol_go, "scale", Vector2(0.9, 0.9), 0.05)
+	tween.tween_property(tombol_go, "scale", Vector2(1.0, 1.0), 0.05)
+	GlobalAudio.play_click()
+	await get_tree().create_timer(0.2).timeout
+	ui_petunjuk.visible = false
+	
+	# Nyalakan kembali interaksi (Hanya jika game belum selesai)
+	if not game_selesai:
+		atur_interaksi(true)
+		
+		if not sedang_loop:
+			input_area.editable = true
+			await get_tree().process_frame
+			input_area.grab_focus()
+			input_area.caret_blink = false
+			input_area.caret_blink = true
+
 func _on_hover_entered(b): create_tween().tween_property(b, "scale", Vector2(1.1, 1.1), 0.1)
 func _on_hover_exited(b): create_tween().tween_property(b, "scale", Vector2(1.0, 1.0), 0.1)
 func _animasi_tombol_masuk():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dfarnl607w24w"]
+[gd_scene load_steps=39 format=3 uid="uid://dfarnl607w24w"]
 
 [ext_resource type="Script" uid="uid://dmlk22k75bxah" path="res://maps/looping/logic/level5.gd" id="1_knj6q"]
 [ext_resource type="Texture2D" uid="uid://4fcf7v0l20o8" path="res://assets/Backgound/level5_scene.png" id="2_px1hr"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://dho2ihxnledh6" path="res://assets/player.png" id="7_w7iyo"]
 [ext_resource type="Texture2D" uid="uid://luw6laahs8om" path="res://assets/Button/maps/lanjut.png" id="8_in0ec"]
 [ext_resource type="Texture2D" uid="uid://d3gn5muckqffd" path="res://assets/Button/maps/ulang.png" id="9_kqlkf"]
+[ext_resource type="Texture2D" uid="uid://43rbbx860ckv" path="res://assets/Other/tips_looping.png" id="10_kqlkf"]
+[ext_resource type="Texture2D" uid="uid://cxs54teeyh70d" path="res://assets/Button/maps/goo.png" id="11_b3vlw"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nbp7g"]
 
@@ -372,4 +374,35 @@ offset_bottom = 318.0
 pivot_offset = Vector2(91.5, 21.5)
 focus_mode = 0
 icon = ExtResource("9_kqlkf")
+flat = true
+
+[node name="UI_Tips" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="UI_Tips"]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -175.0
+offset_right = 300.0
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(300, 175)
+texture = ExtResource("10_kqlkf")
+metadata/_edit_use_anchors_ = true
+
+[node name="go" type="Button" parent="UI_Tips/TextureRect"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 435.5
+offset_top = 290.5
+offset_right = 568.5
+offset_bottom = 323.5
+pivot_offset = Vector2(66.5, 16.5)
+focus_mode = 0
+icon = ExtResource("11_b3vlw")
 flat = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dqk32d6bknu1k"]
+[gd_scene load_steps=39 format=3 uid="uid://dqk32d6bknu1k"]
 
 [ext_resource type="Script" uid="uid://jq1q7a1nd7t3" path="res://maps/variabel/logic/level4.gd" id="1_8562x"]
 [ext_resource type="Texture2D" uid="uid://cq36xwqtt4wyn" path="res://assets/Backgound/level4_scene.png" id="2_ye6xd"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://1dglhky1k5vh" path="res://assets/Other/papan_next_level.png" id="7_04ngj"]
 [ext_resource type="Texture2D" uid="uid://luw6laahs8om" path="res://assets/Button/maps/lanjut.png" id="8_tbp7g"]
 [ext_resource type="Texture2D" uid="uid://d3gn5muckqffd" path="res://assets/Button/maps/ulang.png" id="9_anpyr"]
+[ext_resource type="Texture2D" uid="uid://36vsn4tx2r1r" path="res://assets/Other/tips_variabel.png" id="10_anpyr"]
+[ext_resource type="Texture2D" uid="uid://cxs54teeyh70d" path="res://assets/Button/maps/goo.png" id="11_y1rm5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_elquc"]
 atlas = ExtResource("7_2sgqg")
@@ -374,3 +376,35 @@ pivot_offset = Vector2(91.5, 21.5)
 focus_mode = 0
 icon = ExtResource("9_anpyr")
 flat = true
+
+[node name="UI_Tips" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="UI_Tips"]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -175.0
+offset_right = 300.0
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(300, 175)
+texture = ExtResource("10_anpyr")
+metadata/_edit_use_anchors_ = true
+
+[node name="go" type="Button" parent="UI_Tips/TextureRect"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 435.5
+offset_top = 290.5
+offset_right = 568.5
+offset_bottom = 323.5
+pivot_offset = Vector2(66.5, 16.5)
+focus_mode = 0
+icon = ExtResource("11_y1rm5")
+flat = true
+metadata/_edit_use_anchors_ = true

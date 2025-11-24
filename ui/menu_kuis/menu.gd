@@ -107,7 +107,7 @@ func _on_looping_pressed() -> void:
 func _on_inout_pressed() -> void:
 	GlobalAudio.play_click()
 	await get_tree().create_timer(0.1).timeout
-	get_tree().change_scene_to_file("res://ui/menu_kuis/menu_latihan/input_output/input_output.tscn")
+	get_tree().change_scene_to_file("res://ui/menu_kuis/menu_latihan/inOut/inOut.tscn")
 
 func _on_kembali_pressed() -> void:
 	GlobalAudio.play_click()

@@ -1,74 +1,82 @@
-[gd_scene load_steps=33 format=3 uid="uid://b8mjkjoh453be"]
+[gd_scene load_steps=32 format=3 uid="uid://viwy0sauru8e"]
 
-[ext_resource type="Texture2D" uid="uid://dad7t7262xh2t" path="res://assets/Backgound/level1_scene.png" id="1_ady8r"]
-[ext_resource type="Script" uid="uid://ccqrdkhaiksvj" path="res://maps/variabel/logic/level1.gd" id="1_pywsr"]
-[ext_resource type="Texture2D" uid="uid://5yk4bllahhph" path="res://assets/Button/maps/run.png" id="2_4kt3j"]
-[ext_resource type="Texture2D" uid="uid://cqqa07t1lte16" path="res://assets/Button/maps/back_map.png" id="3_flkq1"]
-[ext_resource type="Texture2D" uid="uid://c87v032h6thhx" path="res://assets/Button/maps/petunjuk_map.png" id="4_nqsiw"]
-[ext_resource type="Texture2D" uid="uid://1dglhky1k5vh" path="res://assets/Other/papan_next_level.png" id="7_50xe0"]
-[ext_resource type="Texture2D" uid="uid://dho2ihxnledh6" path="res://assets/player.png" id="7_r31j6"]
-[ext_resource type="Texture2D" uid="uid://luw6laahs8om" path="res://assets/Button/maps/lanjut.png" id="8_avb2l"]
-[ext_resource type="Texture2D" uid="uid://d3gn5muckqffd" path="res://assets/Button/maps/ulang.png" id="9_4mvi8"]
-[ext_resource type="Texture2D" uid="uid://36vsn4tx2r1r" path="res://assets/Other/tips_variabel.png" id="10_4mvi8"]
-[ext_resource type="Texture2D" uid="uid://cxs54teeyh70d" path="res://assets/Button/maps/goo.png" id="11_npiro"]
+[ext_resource type="Script" uid="uid://di7kk4g38m55l" path="res://maps/ifElse/logic/level1.gd" id="1_jsf6u"]
+[ext_resource type="Texture2D" uid="uid://dad7t7262xh2t" path="res://assets/Backgound/level1_scene.png" id="2_cngfb"]
+[ext_resource type="Texture2D" uid="uid://5yk4bllahhph" path="res://assets/Button/maps/run.png" id="3_6lp7l"]
+[ext_resource type="Texture2D" uid="uid://cqqa07t1lte16" path="res://assets/Button/maps/back_map.png" id="4_36wtt"]
+[ext_resource type="Texture2D" uid="uid://c87v032h6thhx" path="res://assets/Button/maps/petunjuk_map.png" id="5_xy221"]
+[ext_resource type="Texture2D" uid="uid://dho2ihxnledh6" path="res://assets/player.png" id="6_cngfb"]
+[ext_resource type="Texture2D" uid="uid://1dglhky1k5vh" path="res://assets/Other/papan_next_level.png" id="7_xy221"]
+[ext_resource type="Texture2D" uid="uid://luw6laahs8om" path="res://assets/Button/maps/lanjut.png" id="8_efa5x"]
+[ext_resource type="Texture2D" uid="uid://d3gn5muckqffd" path="res://assets/Button/maps/ulang.png" id="9_554he"]
+[ext_resource type="Texture2D" uid="uid://cus715op0qpwp" path="res://assets/Other/tips_ifElse.png" id="10_554he"]
+[ext_resource type="Texture2D" uid="uid://cxs54teeyh70d" path="res://assets/Button/maps/goo.png" id="11_d0kcy"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6lp7l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_36wtt"]
+size = Vector2(17, 511)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6lp7l"]
+size = Vector2(693, 11)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_elquc"]
-atlas = ExtResource("7_r31j6")
+atlas = ExtResource("6_cngfb")
 region = Rect2(803, 258, 73, 86)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5x3so"]
-atlas = ExtResource("7_r31j6")
+atlas = ExtResource("6_cngfb")
 region = Rect2(949, 258, 73, 86)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7e46u"]
-atlas = ExtResource("7_r31j6")
+atlas = ExtResource("6_cngfb")
 region = Rect2(949, 344, 73, 86)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wwcrg"]
-atlas = ExtResource("7_r31j6")
+atlas = ExtResource("6_cngfb")
 region = Rect2(803, 344, 73, 86)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hbtm2"]
-atlas = ExtResource("7_r31j6")
+atlas = ExtResource("6_cngfb")
 region = Rect2(876, 344, 73, 86)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nmw0x"]
-atlas = ExtResource("7_r31j6")
+atlas = ExtResource("6_cngfb")
 region = Rect2(1020, 425, 85, 85)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_07t30"]
-atlas = ExtResource("7_r31j6")
+atlas = ExtResource("6_cngfb")
 region = Rect2(1020, 340, 85, 85)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dabxs"]
-atlas = ExtResource("7_r31j6")
+atlas = ExtResource("6_cngfb")
 region = Rect2(1020, 255, 85, 85)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lkd80"]
-atlas = ExtResource("7_r31j6")
+atlas = ExtResource("6_cngfb")
 region = Rect2(869, 602, 79, 86)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b20xn"]
-atlas = ExtResource("7_r31j6")
+atlas = ExtResource("6_cngfb")
 region = Rect2(948, 602, 79, 86)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b03pn"]
-atlas = ExtResource("7_r31j6")
+atlas = ExtResource("6_cngfb")
 region = Rect2(790, 602, 79, 86)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_owjsh"]
-atlas = ExtResource("7_r31j6")
+atlas = ExtResource("6_cngfb")
 region = Rect2(790, 688, 79, 86)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7kcg0"]
-atlas = ExtResource("7_r31j6")
+atlas = ExtResource("6_cngfb")
 region = Rect2(948, 688, 79, 86)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lvl6k"]
-atlas = ExtResource("7_r31j6")
+atlas = ExtResource("6_cngfb")
 region = Rect2(869, 688, 79, 86)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_50xe0"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_36wtt"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -183,67 +191,75 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_avb2l"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xy221"]
 radius = 6.0
 height = 12.0
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5rh64"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_r31j6"]
-size = Vector2(17, 511)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_50xe0"]
-size = Vector2(693, 11)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_avb2l"]
-size = Vector2(17, 511)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_880jb"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xy221"]
 size = Vector2(65, 38)
 
 [node name="Level1" type="Node2D"]
-script = ExtResource("1_pywsr")
+script = ExtResource("1_jsf6u")
 
 [node name="map" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(480, 265)
-texture = ExtResource("1_ady8r")
+texture = ExtResource("2_cngfb")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="map"]
+physics_material_override = SubResource("PhysicsMaterial_6lp7l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="map/StaticBody2D"]
+position = Vector2(220, -1.5)
+shape = SubResource("RectangleShape2D_36wtt")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="map/StaticBody2D"]
+position = Vector2(-470, 1)
+shape = SubResource("RectangleShape2D_36wtt")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="map/StaticBody2D"]
+position = Vector2(-120.5, -185)
+shape = SubResource("RectangleShape2D_6lp7l")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="map/StaticBody2D"]
+position = Vector2(-120.5, 255)
+shape = SubResource("RectangleShape2D_6lp7l")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="map/StaticBody2D"]
+position = Vector2(142, -6)
+shape = SubResource("RectangleShape2D_36wtt")
 
 [node name="run" type="Button" parent="map"]
-texture_filter = 1
 offset_left = 242.0
 offset_top = 132.0
 offset_right = 450.0
 offset_bottom = 180.0
 pivot_offset = Vector2(104, 24)
 focus_mode = 0
-icon = ExtResource("2_4kt3j")
+icon = ExtResource("3_6lp7l")
 flat = true
 
 [node name="back" type="Button" parent="map"]
-texture_filter = 1
 offset_left = 290.0
 offset_top = 195.0
 offset_right = 398.0
 offset_bottom = 223.0
 pivot_offset = Vector2(54, 14)
 focus_mode = 0
-icon = ExtResource("3_flkq1")
+icon = ExtResource("4_36wtt")
 flat = true
 
 [node name="tips" type="Button" parent="map"]
-texture_filter = 1
 offset_left = 290.0
 offset_top = 225.0
 offset_right = 398.0
 offset_bottom = 253.0
 pivot_offset = Vector2(54, 14)
 focus_mode = 0
-icon = ExtResource("4_nqsiw")
+icon = ExtResource("5_xy221")
 flat = true
 
 [node name="karakter" type="CharacterBody2D" parent="map"]
-texture_filter = 1
 position = Vector2(-707, 31)
 scale = Vector2(1.5, 1.5)
 
@@ -252,38 +268,15 @@ z_as_relative = false
 texture_filter = 1
 position = Vector2(581.3333, 73.333336)
 scale = Vector2(0.5388127, 0.72093016)
-sprite_frames = SubResource("SpriteFrames_50xe0")
-animation = &"diam"
+sprite_frames = SubResource("SpriteFrames_36wtt")
+animation = &"jalan_atas"
 autoplay = "diam"
 speed_scale = 1.75
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="map/karakter"]
 position = Vector2(594.6667, 126.000015)
-shape = SubResource("CapsuleShape2D_avb2l")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="map"]
-physics_material_override = SubResource("PhysicsMaterial_5rh64")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="map/StaticBody2D"]
-position = Vector2(220, -1.5)
-shape = SubResource("RectangleShape2D_r31j6")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="map/StaticBody2D"]
-position = Vector2(-468, 1)
-shape = SubResource("RectangleShape2D_r31j6")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="map/StaticBody2D"]
-position = Vector2(-120.5, -185)
-shape = SubResource("RectangleShape2D_50xe0")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="map/StaticBody2D"]
-position = Vector2(-120.5, 255)
-shape = SubResource("RectangleShape2D_50xe0")
-
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="map/StaticBody2D"]
-position = Vector2(142, -6)
-shape = SubResource("RectangleShape2D_avb2l")
+shape = SubResource("CapsuleShape2D_xy221")
 
 [node name="TextEdit" type="TextEdit" parent="map"]
 texture_filter = 1
@@ -298,10 +291,9 @@ theme_override_font_sizes/font_size = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="map/FinishArea"]
 position = Vector2(182, -140)
-shape = SubResource("RectangleShape2D_880jb")
+shape = SubResource("RectangleShape2D_xy221")
 
 [node name="UI_Finish" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="TextureRect" type="TextureRect" parent="UI_Finish"]
 anchors_preset = 8
@@ -315,7 +307,7 @@ offset_right = 262.5
 offset_bottom = 175.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("7_50xe0")
+texture = ExtResource("7_xy221")
 metadata/_edit_use_anchors_ = true
 
 [node name="TombolLanjut" type="Button" parent="UI_Finish/TextureRect"]
@@ -326,9 +318,8 @@ offset_right = 458.0
 offset_bottom = 318.0
 pivot_offset = Vector2(91.5, 21.5)
 focus_mode = 0
-icon = ExtResource("8_avb2l")
+icon = ExtResource("8_efa5x")
 flat = true
-metadata/_edit_use_anchors_ = true
 
 [node name="TombolUlangi" type="Button" parent="UI_Finish/TextureRect"]
 layout_mode = 0
@@ -338,9 +329,8 @@ offset_right = 248.0
 offset_bottom = 318.0
 pivot_offset = Vector2(91.5, 21.5)
 focus_mode = 0
-icon = ExtResource("9_4mvi8")
+icon = ExtResource("9_554he")
 flat = true
-metadata/_edit_use_anchors_ = true
 
 [node name="UI_Tips" type="CanvasLayer" parent="."]
 
@@ -358,7 +348,7 @@ offset_bottom = 175.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(300, 175)
-texture = ExtResource("10_4mvi8")
+texture = ExtResource("10_554he")
 metadata/_edit_use_anchors_ = true
 
 [node name="go" type="Button" parent="UI_Tips/TextureRect"]
@@ -370,6 +360,5 @@ offset_right = 568.5
 offset_bottom = 323.5
 pivot_offset = Vector2(66.5, 16.5)
 focus_mode = 0
-icon = ExtResource("11_npiro")
+icon = ExtResource("11_d0kcy")
 flat = true
-metadata/_edit_use_anchors_ = true
