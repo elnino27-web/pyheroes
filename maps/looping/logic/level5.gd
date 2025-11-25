@@ -235,8 +235,8 @@ func eksekusi_satu_baris_gerak(baris: String):
 func gerakkan_player(arah: String):
 	if game_selesai: return
 
-	var jarak_x = 121
-	var jarak_y = 88
+	var jarak_x = 123.7
+	var jarak_y = 90
 	var vec = Vector2.ZERO
 	
 	match arah:
@@ -269,7 +269,7 @@ func gerakkan_player(arah: String):
 	# Hapus jeda diam agar mulus
 
 func cek_apakah_tembok(arah: String) -> bool:
-	var jarak_x = 121; var jarak_y = 88; var vec = Vector2.ZERO
+	var jarak_x = 123.7; var jarak_y = 90; var vec = Vector2.ZERO
 	match arah:
 		"kanan": vec = Vector2.RIGHT * jarak_x
 		"kiri":  vec = Vector2.LEFT * jarak_x

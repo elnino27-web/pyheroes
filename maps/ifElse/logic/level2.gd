@@ -153,8 +153,8 @@ func handle_reset_command():
 func aksi_nabrak(arah: String):
 	if not (arah in ["kanan", "kiri", "atas", "bawah"]): return
 
-	var jarak_x = 121
-	var jarak_y = 88
+	var jarak_x = 124
+	var jarak_y = 90
 	var vec = Vector2.ZERO
 	
 	match arah:
@@ -193,8 +193,8 @@ func cek_validasi_gerak(arah: String) -> bool:
 	return not cek_apakah_tembok(arah)
 
 func cek_apakah_tembok(arah: String) -> bool:
-	var jarak_x = 121
-	var jarak_y = 88
+	var jarak_x = 123.7
+	var jarak_y = 90
 	var vec = Vector2.ZERO
 	
 	match arah:
@@ -213,8 +213,8 @@ func cek_apakah_tembok(arah: String) -> bool:
 func gerakkan_player(arah: String):
 	if game_selesai: return
 
-	var jarak_x = 121
-	var jarak_y = 88
+	var jarak_x = 123.7
+	var jarak_y = 90
 	var vec = Vector2.ZERO
 	
 	match arah:

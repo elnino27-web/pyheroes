@@ -329,10 +329,10 @@ func gerakkan_player(arah: String):
 	if game_selesai: return
 	var vec = Vector2.ZERO
 	match arah:
-		"kanan": vec = Vector2.RIGHT * 121
-		"kiri":  vec = Vector2.LEFT * 121
-		"atas":  vec = Vector2.UP * 88
-		"bawah": vec = Vector2.DOWN * 88
+		"kanan": vec = Vector2.RIGHT * 123.7
+		"kiri":  vec = Vector2.LEFT * 123.7
+		"atas":  vec = Vector2.UP * 90
+		"bawah": vec = Vector2.DOWN * 90
 		_: return 
 	
 	var flip = (arah == "kiri")
@@ -349,19 +349,19 @@ func gerakkan_player(arah: String):
 func cek_apakah_tembok(arah: String) -> bool:
 	var vec = Vector2.ZERO
 	match arah:
-		"kanan": vec = Vector2.RIGHT * 121
-		"kiri":  vec = Vector2.LEFT * 121
-		"atas":  vec = Vector2.UP * 88
-		"bawah": vec = Vector2.DOWN * 88
+		"kanan": vec = Vector2.RIGHT * 123.7
+		"kiri":  vec = Vector2.LEFT * 123.7
+		"atas":  vec = Vector2.UP * 90
+		"bawah": vec = Vector2.DOWN * 90
 	return player.move_and_collide(vec, true) != null
 
 func aksi_nabrak(arah: String):
 	var vec = Vector2.ZERO
 	match arah:
-		"kanan": vec = Vector2.RIGHT * 121
-		"kiri":  vec = Vector2.LEFT * 121
-		"atas":  vec = Vector2.UP * 88
-		"bawah": vec = Vector2.DOWN * 88
+		"kanan": vec = Vector2.RIGHT * 124
+		"kiri":  vec = Vector2.LEFT * 124
+		"atas":  vec = Vector2.UP * 90
+		"bawah": vec = Vector2.DOWN * 90
 	GlobalAudio.play_nabrak()
 	var tween = create_tween()
 	tween.tween_property(player, "position", player.position + (vec * 0.15), 0.1)

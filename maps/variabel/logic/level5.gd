@@ -159,8 +159,8 @@ func jalankan_kode_user():
 func gerakkan_player(arah: String):
 	if game_selesai: return
 
-	var jarak_x = 121
-	var jarak_y = 88
+	var jarak_x = 123.7
+	var jarak_y = 90
 	var vec = Vector2.ZERO
 	
 	match arah:
