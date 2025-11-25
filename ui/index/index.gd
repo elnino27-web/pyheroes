@@ -8,6 +8,9 @@ extends Control
 @onready var mobil2 = $background/mobil2
 @onready var mobil3 = $background/mobil3
 
+@onready var informasi = $UI_Petunjuk
+@onready var tombol_x = $UI_Petunjuk/TextureRect/x
+
 var kecepatan = 100
 var arah = Vector2.RIGHT
 
@@ -31,6 +34,8 @@ func _ready():
 	for tombol in [tombol_bermain, tombol_petunjuk, tombol_keluar]:
 		tombol.scale = Vector2(0, 0)           # Tombol mengecil jadi 0
 	
+	informasi.visible = false
+	
 	# Mulai animasi masuk
 	animasi_masuk()
 
@@ -42,6 +47,7 @@ func _ready():
 	tombol_bermain.connect("pressed", Callable(self, "_on_bermain_pressed"))
 	tombol_petunjuk.connect("pressed", Callable(self, "_on_petunjuk_pressed"))
 	tombol_keluar.connect("pressed", Callable(self, "_on_keluar_pressed"))
+	tombol_x.connect("pressed", Callable(self, "_on_x_pressed"))
 
 # ==========================
 # 🔸 Efek Hover
@@ -88,9 +94,14 @@ func _on_bermain_pressed():
 func _on_petunjuk_pressed():
 	GlobalAudio.play_click()
 	await get_tree().create_timer(0.1).timeout
-	print("Menampilkan petunjuk...")
+	informasi.visible = true
 
 func _on_keluar_pressed():
 	GlobalAudio.play_click()
 	await get_tree().create_timer(0.1).timeout
 	get_tree().change_scene_to_file("res://ui/popup/poput_exit.tscn")
+
+func _on_x_pressed():
+	GlobalAudio.play_click()
+	await get_tree().create_timer(0.1).timeout
+	informasi.visible = false

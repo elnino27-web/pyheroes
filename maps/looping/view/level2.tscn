@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://bt8pkckl18b1h"]
+[gd_scene load_steps=63 format=3 uid="uid://bt8pkckl18b1h"]
 
 [ext_resource type="Texture2D" uid="uid://bd5kbqqbou42i" path="res://assets/Backgound/level2_scene.png" id="1_a27ry"]
 [ext_resource type="Script" uid="uid://d2auru13txvi5" path="res://maps/looping/logic/level2.gd" id="1_so608"]
@@ -32,17 +32,29 @@ size = Vector2(53, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gquc0"]
 size = Vector2(65, 38)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_awp0h"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ke2jh"]
 atlas = ExtResource("6_0xtkp")
-region = Rect2(0, 128, 64, 64)
+region = Rect2(0, 896, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7fc6w"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hce3"]
 atlas = ExtResource("6_0xtkp")
-region = Rect2(64, 128, 64, 64)
+region = Rect2(64, 896, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_utj1w"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_k543t"]
 atlas = ExtResource("6_0xtkp")
-region = Rect2(384, 128, 64, 64)
+region = Rect2(128, 896, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0tfix"]
+atlas = ExtResource("6_0xtkp")
+region = Rect2(192, 896, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t68yo"]
+atlas = ExtResource("6_0xtkp")
+region = Rect2(256, 896, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_448op"]
+atlas = ExtResource("6_0xtkp")
+region = Rect2(320, 896, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4mvi8"]
 atlas = ExtResource("6_0xtkp")
@@ -192,13 +204,22 @@ region = Rect2(512, 704, 64, 64)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_awp0h")
+"texture": SubResource("AtlasTexture_ke2jh")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7fc6w")
+"texture": SubResource("AtlasTexture_2hce3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_utj1w")
+"texture": SubResource("AtlasTexture_k543t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0tfix")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t68yo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_448op")
 }],
 "loop": true,
 "name": &"diam",
